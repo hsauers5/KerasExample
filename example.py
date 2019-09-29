@@ -25,9 +25,9 @@ model.add(Dense(8, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(X, y, epochs=500, batch_size=50)
+model.fit(X, y, epochs=150, batch_size=50)
 
 scores = model.evaluate(X, y, verbose=0)
 print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
-
 model.save_weights("model.h5")
+
