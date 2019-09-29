@@ -23,8 +23,7 @@ data_x = numpy.array(data_x)
 data_y = numpy.array(data_y)
 
 model = Sequential()
-model.add(Dense(16, input_dim=data_length, activation='sigmoid'))
-# model.add(Dense(8, activation='tanh'))
+model.add(Dense(16, input_dim=data_length, activation='sigmoid'))  # sigmoid/relu12/tanh1, 94.95, 41/50
 model.add(Dense(12, activation='relu'))
 model.add(Dense(1, activation='tanh'))
 
