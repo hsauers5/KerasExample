@@ -1,5 +1,34 @@
 # data structure for survey answers
 class Student:
+    
+    core_keys = [
+         "parental_care", 
+         "mental_illness_potential", 
+         "promiscuous", 
+         "sexual_assault", 
+         "violence_perp", 
+         "violence_victim", 
+         "age", 
+         "sex", 
+         "grade", 
+         "tried_marijuana", 
+         "age_marijuana", 
+         "current_marijuana", 
+         "tried_cigs", 
+         "age_cigs", 
+         "smokes_cigs", 
+         "cigs_per_day", 
+         "had_sex", 
+         "age_of_sex", 
+         "sex_partners_total", 
+         "sex_partners_recent", 
+         "sex_intoxicated", 
+         "sexuality", 
+         "weight", 
+         "weight_loss", 
+         "avg_grades"
+    ]
+    
     raw_data = []
 
     # raw variables
@@ -103,12 +132,12 @@ class Student:
 
     # derived variables - CODED 1 FOR NO, 2 FOR YES
     ever_hard_drugs = 0
-    sexual_assault = 1
-    violence_perp = 1
-    violence_victim = 1
-    mental_illness_potential = 1
-    promiscuous = 1
-    parental_care = 1
+    sexual_assault = 0
+    violence_perp = 0
+    violence_victim = 0
+    mental_illness_potential = 0
+    promiscuous = 0
+    parental_care = 0
     risk_score = 0
     opiate_risk_score = 0
     opiate_use = 0
@@ -151,7 +180,7 @@ class Student:
                 self.grade,
                 self.tried_marijuana,
                 self.age_marijuana,
-                self.current_marijuana,
+                # self.current_marijuana,
                 self.tried_cigs,
                 self.age_cigs,
                 self.smokes_cigs,
@@ -160,7 +189,7 @@ class Student:
                 self.age_of_sex,
                 self.sex_partners_total,
                 self.sex_partners_recent,
-                self.sex_intoxicated,
+                # self.sex_intoxicated,
                 self.sexuality,
                 self.weight,
                 self.weight_loss,
@@ -269,7 +298,7 @@ class Student:
         index += 1
         self.age = int(csv_row[index])
         index += 1
-        self.sex = int(csv_row[index])
+        self.sex = int(csv_row[index])-1
         index += 1
         self.grade = int(csv_row[index])
         index += 1
@@ -319,17 +348,17 @@ class Student:
         index += 1
         self.suicide_injury = int(csv_row[index])
         index += 1
-        self.tried_cigs = int(csv_row[index])
+        self.tried_cigs = int(csv_row[index]) - 1
         index += 1
-        self.age_cigs = int(csv_row[index])
+        self.age_cigs = int(csv_row[index]) - 1
         index += 1
-        self.smokes_cigs = int(csv_row[index])
+        self.smokes_cigs = int(csv_row[index]) - 1
         index += 1
-        self.cigs_per_day = int(csv_row[index])
+        self.cigs_per_day = int(csv_row[index]) - 1
         index += 1
-        self.vaping = int(csv_row[index])
+        self.vaping = int(csv_row[index]) - 1
         index += 1
-        self.days_vaping = int(csv_row[index])
+        self.days_vaping = int(csv_row[index]) - 1
         index += 1
         self.acquire_vape = int(csv_row[index])
         index += 1
@@ -351,13 +380,13 @@ class Student:
         index += 1
         self.max_drinks = int(csv_row[index])
         index += 1
-        self.tried_marijuana = int(csv_row[index])
+        self.tried_marijuana = int(csv_row[index]) - 1
         index += 1
-        self.age_marijuana = int(csv_row[index])
+        self.age_marijuana = int(csv_row[index]) - 1
         index += 1
-        self.current_marijuana = int(csv_row[index])
+        self.current_marijuana = int(csv_row[index]) - 1
         index += 1
-        self.ever_cocaine = int(csv_row[index])
+        self.ever_cocaine = int(csv_row[index]) - 1
         index += 1
         self.ever_inhalants = int(csv_row[index])
         index += 1
@@ -377,15 +406,15 @@ class Student:
         index += 1
         self.drugs_at_school = int(csv_row[index])
         index += 1
-        self.had_sex = int(csv_row[index])
+        self.had_sex = int(csv_row[index]) - 1
         index += 1
-        self.age_of_sex = int(csv_row[index])
+        self.age_of_sex = int(csv_row[index]) - 1
         index += 1
-        self.sex_partners_total = int(csv_row[index])
+        self.sex_partners_total = int(csv_row[index]) - 1
         index += 1
-        self.sex_partners_recent = int(csv_row[index])
+        self.sex_partners_recent = int(csv_row[index]) - 1
         index += 1
-        self.sex_intoxicated = int(csv_row[index])
+        self.sex_intoxicated = int(csv_row[index]) - 1
         index += 1
         self.condom_use = int(csv_row[index])
         index += 1
@@ -393,11 +422,11 @@ class Student:
         index += 1
         self.sex_of_sexual_contacts = int(csv_row[index])
         index += 1
-        self.sexuality = int(csv_row[index])
+        self.sexuality = int(csv_row[index]) - 1
         index += 1
-        self.weight = int(csv_row[index])
+        self.weight = int(csv_row[index]) - 1
         index += 1
-        self.weight_loss = int(csv_row[index])
+        self.weight_loss = int(csv_row[index]) - 1
         index += 1
         self.fruit_juice_drinking = int(csv_row[index])
         index += 1
@@ -463,27 +492,27 @@ class Student:
 
         # derive new variables
 
-        if self.ever_cocaine != 1 or self.ever_inhalants != 1 or self.ever_heroin != 1 or self.ever_meth != 1 or self.ever_ecstasy != 1 or self.ever_spice != 1 or self.ever_opioids != 1:
+        if self.ever_cocaine >= 1 or self.ever_inhalants >= 2 or self.ever_heroin >= 1 or self.ever_meth >= 1 or self.ever_ecstasy >= 2 or self.ever_spice >= 1 or self.ever_opioids >= 2:
             self.ever_hard_drugs = 1
 
         if self.been_raped != 2 or self.been_forced_sexually != 1 or self.date_rape_assault != 1 or self.sex_intoxicated != 1:
-            self.sexual_assault = 2
+            self.sexual_assault = 1
 
         if self.carry_weapon != 1 or self.weapon_at_school != 1 or self.physical_fights != 1 or self.fights_at_school != 1:
-            self.violence_perp = 2
+            self.violence_perp = 1
 
         if self.school_notsafe != 1 or self.school_threats != 1 or self.bullied_school != 2:
-            self.violence_victim = 2
+            self.violence_victim = 1
 
         if self.sad_hopeless != 2 or self.consider_suicide != 2 or (
                 self.weight == 1 and self.weight_loss == 1) or self.difficulty_concentrating == 1:
-            self.mental_illness_potential = 2
+            self.mental_illness_potential = 1
 
         if self.sex_partners_total >= 5 or self.sex_partners_recent >= 4 or self.sex_intoxicated == 2:
-            self.promiscuous = 2
+            self.promiscuous = 1
 
-        if self.fruit_juice_drinking >= 3 and self.ate_other_vegetable >= 4 and self.dentist_visit <= 2:
-            self.parental_care = 2
+        if (self.fruit_juice_drinking >= 2 or self.ate_other_vegetable >= 4) and self.dentist_visit <= 2:
+            self.parental_care = 1
 
         if self.drive_marijuana > 2:
             self.risk_score += 1

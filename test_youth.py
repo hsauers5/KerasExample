@@ -16,18 +16,20 @@ with open('data/testing.csv') as csv_file:
                 row[i] = '0'
         this_student = Student(row)
         data_x.append(this_student.get_core_no_opiates())
-        data_y.append(this_student.opiate_use)
+        data_y.append(this_student.ever_hard_drugs)
 
 data_length = len(data_x[0])
 data_x = numpy.array(data_x)
 data_y = numpy.array(data_y)
 
 model = Sequential()
-model.add(Dense(16, input_dim=data_length, activation='sigmoid'))  # sigmoid/relu12/tanh1, 94.95, 41/50
-model.add(Dense(12, activation='relu'))
-model.add(Dense(1, activation='tanh'))
+model.add(Dense(150, input_dim=data_length, activation='tanh'))  # sigmoid/relu12/tanh1, 94.8, 53/56
+model.add(Dense(72, activation='relu'))
+model.add(Dense(64, activation='tanh'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
 
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='mean_squared_error', optimizer='sgd', metrics=['accuracy'])
 
 model.load_weights('splitmodel.h5')
 scores = model.evaluate(data_x, data_y, verbose=0)
